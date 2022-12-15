@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment #tipo
+metadata:
+  name: portal-noticias-deployment #definindo o nome do replicaset
+spec: #especificações do POD
+  template:
+    metadata:
+      name: portal-noticias
+      labels:
+        app: portal-noticias #label
+    spec:
+      containers:
+        - name: portal-noticias-container
+          image: aluracursos/portal-noticias:1
+          ports:
+            - containerPort: 80 #porta que o container escuta
+          envFrom:
+            - configMapRef:
+                name: portal-configmap
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: portal-noticias #vinculando o ReplicaSet ao POD por meio da label

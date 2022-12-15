@@ -1,0 +1,31 @@
+###### DEPLOYMENT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sistema-noticias-deploy
+######
+
+###### Definição das REPLICAS
+spec:
+  replicas: 1
+######
+
+###### Definição dos PODS
+  template:
+    metadata:
+      name: sistema-noticias
+      labels:
+        app: sistema-noticias
+######
+
+###### Definição dos CONTAINERS
+    spec:
+      containers:
+        - name: sistema-noticias-container
+          image: aluracursos/sistema-noticias:1
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: sistema-configmap
+######
