@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sistema-noticias-deployment
+  name: db-noticias-deployment
 ######
 
 ###### Definição das REPLICAS
@@ -13,25 +13,25 @@ spec:
 ###### Definição dos PODS
   template:
     metadata:
-      name: sistema-noticias
+      name: db-noticias
       labels:
-        app: sistema-noticias
+        app: db-noticias
 ######
 
 ###### Definição dos CONTAINERS
     spec:
       containers:
-        - name: sistema-noticias-container
-          image: aluracursos/sistema-noticias:1
+        - name: db-noticias-container
+          image: aluracursos/db-noticias:1
           ports:
             - containerPort: 80
           envFrom:
             - configMapRef:
-                name: sistema-configmap
+                name: db-configmap
 ######
 
 ##### Vinculando o DEPLOYMENT ao POD
   selector:
     matchLabels:
-      app: sistema-noticias
+      app: db-noticias
 #####
